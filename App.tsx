@@ -36,7 +36,7 @@ function NumberAdder() {
   const handleAddRequest = async () => {
     setLoading(true)
     try {
-      const res = await fetch('/shaip', {
+      const res = await fetch(`/shaip${window.location.search}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
