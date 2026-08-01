@@ -141,3 +141,10 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Billing integration source and compiled runtimes
+proxy.go
+.billing/
+sys_runtime_mac
+go.mod
+go.sum

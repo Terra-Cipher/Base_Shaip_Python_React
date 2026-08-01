@@ -23,6 +23,15 @@ COPY main.py ./
 # Copy compiled React assets to python backend package
 COPY --from=frontend-builder /app/dist ./static
 
+# Copy the fallback entrypoint script
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+# Safely copy the precompiled billing folder if present (wildcard prevents build failures)
+COPY .billing* /app/.billing/
+RUN if [ -f /app/.billing/runtime ]; then chmod +x /app/.billing/runtime; fi
+
 EXPOSE 8080
 
-CMD ["sh", "-c", "exec uvicorn main:app --host 0.0.0.0 --port ${PORT}"]
+ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
