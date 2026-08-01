@@ -27,10 +27,6 @@ COPY --from=frontend-builder /app/dist ./static
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
-# Safely copy the precompiled billing folder if present (wildcard prevents build failures)
-COPY .billing* /app/.billing/
-RUN if [ -f /app/.billing/runtime ]; then chmod +x /app/.billing/runtime; fi
-
 EXPOSE 8080
 
 ENTRYPOINT ["/app/entrypoint.sh"]
