@@ -9,7 +9,7 @@ ENV VITE_BASE_URL=/display/
 RUN npm run build
 
 # =========================================================
-FROM python:3.11-slim
+FROM python:3.11-slim AS runtime
 WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1 \
