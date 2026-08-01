@@ -22,7 +22,13 @@ class AdditionRequest(BaseModel):
     num1: float
     num2: float
 
+# Support multiple path entrypoints to ensure compatibility with
+# both prefix-stripped and unstripped external proxy configurations.
+@app.post("/display/shaip")
+@app.post("/display/shaip/")
 @app.post("/shaip")
+@app.post("/shaip/")
+@app.post("/")
 async def add_numbers(payload: AdditionRequest):
     return {
         "status": "success",
