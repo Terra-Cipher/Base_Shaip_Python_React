@@ -67,7 +67,7 @@ function NumberAdder() {
     <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 max-w-2xl mx-auto">
       <h2 className="text-lg font-semibold mb-4 text-slate-800">Simple Number Adder</h2>
       <p className="text-sm text-slate-600 mb-6">
-        Enter two numbers below and click add. This communicates with the FastAPI backend endpoint <code className="bg-slate-100 px-1 py-0.5 rounded">/shaip</code>.
+        Enter two numbers below and click add. This connects to a FastAPI backend endpoint.
       </p>
       
       <div className="space-y-4">
@@ -118,7 +118,7 @@ function DisplayConsole() {
     <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
       <div className="border-b border-slate-200 pb-4 mb-6">
         <h2 className="text-xl font-bold text-slate-800">Interactive Display Console</h2>
-        <p className="text-sm text-slate-500">Accessible securely under the <code className="bg-slate-100 px-1 py-0.5 rounded">/shaip/display</code> pathing router.</p>
+        <p className="text-sm text-slate-500">Accessible securely under the <code className="bg-slate-100 px-1 py-0.5 rounded">/display/display</code> pathing router.</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
