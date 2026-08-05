@@ -1,0 +1,5 @@
+fastapi==0.110.0
+uvicorn==0.28.0
+pydantic
+python-multipart==0.0.9
+PyJWT[crypto]==2.8.0
