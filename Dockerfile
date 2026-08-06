@@ -1,13 +1,12 @@
 FROM node:20-alpine AS frontend-builder
 WORKDIR /app
 
-COPY package*.json ./
+COPY ./display/package*.json ./
 RUN npm ci
 
-COPY index.html vite.config.js postcss.config.js tailwind.config.js index.css main.tsx App.tsx tsconfig.json vite-env.d.ts ./
-ENV VITE_BASE_URL=/display/
+COPY ./display/ ./display/
+WORKDIR /app/display
 RUN npm run build
-
 # =========================================================
 FROM python:3.11-slim AS runtime
 WORKDIR /app
@@ -15,13 +14,13 @@ WORKDIR /app
 ENV PYTHONUNBUFFERED=1 \
     PORT=8080
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+COPY ./app/requirements.txt ./app/
+RUN pip install --no-cache-dir -r ./app/requirements.txt
 
-COPY main.py ./
+COPY ./app/ ./app/
 
 # Copy compiled React assets to python backend package
-COPY --from=frontend-builder /app/dist ./static
+COPY --from=frontend-builder /app/display/dist ./app/static
 
 # Copy the fallback entrypoint script
 COPY entrypoint.sh /app/entrypoint.sh
@@ -30,4 +29,4 @@ RUN chmod +x /app/entrypoint.sh
 EXPOSE 8080
 
 ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]

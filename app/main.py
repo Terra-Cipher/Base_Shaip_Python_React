@@ -44,6 +44,9 @@ async def serve_react_app(full_path: str = ""):
     # Sanitize path to prevent directory traversal
     safe_path = os.path.normpath(full_path).lstrip("/")
     target_file = os.path.join(STATIC_DIR, safe_path)
+    
+    print("safe_path : ", safe_path)
+    print("target_file : ", target_file)
 
     # Prevent escaping the static directory
     if not os.path.commonpath([STATIC_DIR, os.path.abspath(target_file)]) == STATIC_DIR:
@@ -58,6 +61,7 @@ async def serve_react_app(full_path: str = ""):
 
     # Fallback to index.html for UI SPA routing (React Router)
     index_path = os.path.join(STATIC_DIR, "index.html")
+    print("index_path : ", index_path)
     if os.path.exists(index_path):
         return FileResponse(index_path)
 
